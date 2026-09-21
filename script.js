@@ -5,29 +5,35 @@ const input = document.getElementById('input-tarefa');
 const lista = document.getElementById('lista-tarefas');
 
 function renderizar() {
-  lista.innerHTML = '';
+    lista.innerHTML = '';
 
-  tarefas.forEach((tarefa) => {
-    const li = document.createElement('li');
+    tarefas.forEach((tarefa) => {
+        const li = document.createElement('li');
+        if (tarefa.concluida) li.classList.add('concluida');
 
-    const span = document.createElement('span');
-    span.textContent = tarefa.texto;
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = tarefa.concluida;
 
-    li.appendChild(span);
-    lista.appendChild(li);
-  });
+        const span = document.createElement('span');
+        span.textContent = tarefa.texto;
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        lista.appendChild(li);
+    });
 }
 
 function adicionarTarefa(texto) {
-  tarefas.push({ id: Date.now(), texto, concluida: false });
-  renderizar();
+    tarefas.push({ id: Date.now(), texto, concluida: false });
+    renderizar();
 }
 
 form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const texto = input.value.trim();
-  if (!texto) return;
+    e.preventDefault();
+    const texto = input.value.trim();
+    if (!texto) return;
 
-  adicionarTarefa(texto);
-  input.value = '';
+    adicionarTarefa(texto);
+    input.value = '';
 });
