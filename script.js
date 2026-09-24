@@ -17,7 +17,7 @@ function adicionarTarefa(texto) {
 function renderizar() {
     lista.innerHTML = '';
 
-    tarefas.forEach((tarefa) => {
+    tarefasFiltradas().forEach((tarefa) => {
         const li = document.createElement('li');
         if (tarefa.concluida) li.classList.add('concluida');
 
