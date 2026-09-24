@@ -1,4 +1,4 @@
-let tarefas = [];
+let tarefas = JSON.parse(localStorage.getItem('taskflow:tarefas')) || [];
 
 const form = document.getElementById('form-tarefa');
 const input = document.getElementById('input-tarefa');
@@ -60,3 +60,5 @@ function excluirTarefa(id) {
     tarefas = tarefas.filter((t) => t.id !== id);
     renderizar();
 }
+
+renderizar();
