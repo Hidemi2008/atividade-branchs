@@ -1,14 +1,17 @@
-let tarefas = [];
-let filtroAtual = 'todas';
+let tarefas = JSON.parse(localStorage.getItem('taskflow:tarefas')) || [];
 
 const form = document.getElementById('form-tarefa');
 const input = document.getElementById('input-tarefa');
 const lista = document.getElementById('lista-tarefas');
 
-function tarefasFiltradas() {
-    if (filtroAtual === 'pendentes') return tarefas.filter((t) => !t.concluida);
-    if (filtroAtual === 'concluidas') return tarefas.filter((t) => t.concluida);
-    return tarefas;
+function salvar() {
+    localStorage.setItem('taskflow:tarefas', JSON.stringify(tarefas));
+}
+
+function adicionarTarefa(texto) {
+    tarefas.push({ id: Date.now(), texto, concluida: false });
+    salvar();
+    renderizar();
 }
 
 function renderizar() {
@@ -58,14 +61,4 @@ function excluirTarefa(id) {
     renderizar();
 }
 
-document.querySelectorAll('.filtro').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    filtroAtual = btn.dataset.filtro;
-
-    document.querySelectorAll('.filtro').forEach((b) => {
-      b.classList.toggle('ativo', b === btn);
-    });
-
-    renderizar();
-  });
-});
+renderizar();
