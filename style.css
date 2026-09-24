@@ -80,3 +80,8 @@ li.concluida span {
     text-decoration: line-through;
     color: #999;
 }
+
+.btn-excluir {
+  background: #ef4444;
+  padding: 6px 10px;
+}   

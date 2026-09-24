@@ -20,6 +20,11 @@ function renderizar() {
 
         li.appendChild(checkbox);
         li.appendChild(span);
+        const btnExcluir = document.createElement('button');
+        btnExcluir.textContent = '🗑';
+        btnExcluir.className = 'btn-excluir';
+        btnExcluir.setAttribute('aria-label', 'Excluir tarefa');
+        li.appendChild(btnExcluir);
         lista.appendChild(li);
     });
 }
