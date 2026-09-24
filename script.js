@@ -59,13 +59,28 @@ function excluirTarefa(id) {
 }
 
 document.querySelectorAll('.filtro').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    filtroAtual = btn.dataset.filtro;
+    btn.addEventListener('click', () => {
+        filtroAtual = btn.dataset.filtro;
 
-    document.querySelectorAll('.filtro').forEach((b) => {
-      b.classList.toggle('ativo', b === btn);
+        document.querySelectorAll('.filtro').forEach((b) => {
+            b.classList.toggle('ativo', b === btn);
+        });
+
+        renderizar();
     });
-
-    renderizar();
-  });
 });
+
+const btnTema = document.getElementById('btn-tema');
+
+function aplicarTema(tema) {
+    document.documentElement.setAttribute('data-tema', tema);
+    btnTema.textContent = tema === 'escuro' ? '☀️' : '🌙';
+    localStorage.setItem('taskflow:tema', tema);
+}
+
+btnTema.addEventListener('click', () => {
+    const atual = document.documentElement.getAttribute('data-tema');
+    aplicarTema(atual === 'escuro' ? 'claro' : 'escuro');
+});
+
+aplicarTema(localStorage.getItem('taskflow:tema') || 'claro');
