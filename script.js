@@ -1,13 +1,20 @@
 let tarefas = [];
+let filtroAtual = 'todas';
 
 const form = document.getElementById('form-tarefa');
 const input = document.getElementById('input-tarefa');
 const lista = document.getElementById('lista-tarefas');
 
+function tarefasFiltradas() {
+    if (filtroAtual === 'pendentes') return tarefas.filter((t) => !t.concluida);
+    if (filtroAtual === 'concluidas') return tarefas.filter((t) => t.concluida);
+    return tarefas;
+}
+
 function renderizar() {
     lista.innerHTML = '';
 
-    tarefas.forEach((tarefa) => {
+    tarefasFiltradas().forEach((tarefa) => {
         const li = document.createElement('li');
         if (tarefa.concluida) li.classList.add('concluida');
 
@@ -50,3 +57,15 @@ function excluirTarefa(id) {
     tarefas = tarefas.filter((t) => t.id !== id);
     renderizar();
 }
+
+document.querySelectorAll('.filtro').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    filtroAtual = btn.dataset.filtro;
+
+    document.querySelectorAll('.filtro').forEach((b) => {
+      b.classList.toggle('ativo', b === btn);
+    });
+
+    renderizar();
+  });
+});

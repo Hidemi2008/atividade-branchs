@@ -82,6 +82,23 @@ li.concluida span {
 }
 
 .btn-excluir {
-  background: #ef4444;
-  padding: 6px 10px;
-}   
+    background: #ef4444;
+    padding: 6px 10px;
+}
+
+.filtros {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.filtro {
+    background: #e5e7eb;
+    color: #333;
+}
+
+.filtro.ativo {
+    background: #4f46e5;
+    color: #fff;
+}
