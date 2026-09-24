@@ -4,6 +4,16 @@ const form = document.getElementById('form-tarefa');
 const input = document.getElementById('input-tarefa');
 const lista = document.getElementById('lista-tarefas');
 
+function salvar() {
+    localStorage.setItem('taskflow:tarefas', JSON.stringify(tarefas));
+}
+
+function adicionarTarefa(texto) {
+    tarefas.push({ id: Date.now(), texto, concluida: false });
+    salvar();
+    renderizar();
+}
+
 function renderizar() {
     lista.innerHTML = '';
 
