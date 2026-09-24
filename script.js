@@ -24,6 +24,7 @@ function renderizar() {
         btnExcluir.textContent = '🗑';
         btnExcluir.className = 'btn-excluir';
         btnExcluir.setAttribute('aria-label', 'Excluir tarefa');
+        btnExcluir.addEventListener('click', () => excluirTarefa(tarefa.id));
         li.appendChild(btnExcluir);
         lista.appendChild(li);
     });
@@ -42,3 +43,10 @@ form.addEventListener('submit', (e) => {
     adicionarTarefa(texto);
     input.value = '';
 });
+
+function excluirTarefa(id) {
+    if (!confirm('Deseja realmente excluir esta tarefa?')) return;
+
+    tarefas = tarefas.filter((t) => t.id !== id);
+    renderizar();
+}
